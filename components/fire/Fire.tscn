@@ -1,0 +1,198 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://components/fire/Fire.gd" type="Script" id=1]
+[ext_resource path="res://assets/items/last_outpost_item_wood.png" type="Texture" id=2]
+[ext_resource path="res://assets/light/light.png" type="Texture" id=3]
+[ext_resource path="res://assets/art/last_outpost_fire_base_3.png" type="Texture" id=4]
+[ext_resource path="res://assets/art/last_outpost_fire_base_1.png" type="Texture" id=5]
+[ext_resource path="res://components/fire/last_outpost_fire_middle.png" type="Texture" id=6]
+[ext_resource path="res://assets/art/last_outpost_fire_base_2.png" type="Texture" id=7]
+[ext_resource path="res://components/fire/last_outpost_fire_low.png" type="Texture" id=8]
+[ext_resource path="res://components/fire/last_outpost_fire_high.png" type="Texture" id=9]
+[ext_resource path="res://assets/the_last_outpost_background_skalierung.png" type="Texture" id=10]
+[ext_resource path="res://components/fire/last_outpost_upgrade_anforderung_fire.png" type="Texture" id=11]
+[ext_resource path="res://components/fire/last_outpost_sound_fire.ogg" type="AudioStream" id=12]
+[ext_resource path="res://components/fire/last_outpost_sound_throwing_wood_in_fire.wav" type="AudioStream" id=13]
+
+[sub_resource type="OccluderPolygon2D" id=3]
+polygon = PoolVector2Array( -257.774, 100.534, -257.774, 122.452, -235.856, 122.452, -235.856, 100.534 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 9 ) ],
+"loop": true,
+"name": "high",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ) ],
+"loop": true,
+"name": "low",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "middle",
+"speed": 5.0
+} ]
+
+[node name="Fire" type="StaticBody2D"]
+collision_layer = 3
+script = ExtResource( 1 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 12 )
+volume_db = -6.0
+autoplay = true
+max_distance = 700.0
+
+[node name="TheLastOutpostBackgroundSkalierung" type="Sprite" parent="."]
+visible = false
+position = Vector2( -16, -144 )
+texture = ExtResource( 10 )
+
+[node name="Images" type="Node2D" parent="."]
+position = Vector2( 7, -4 )
+scale = Vector2( 0.365, 0.365 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="FireBase3" type="Sprite" parent="Images"]
+visible = false
+light_mask = 32
+position = Vector2( -2.5, -243 )
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="Images/FireBase3"]
+visible = false
+position = Vector2( 92.911, -30.9726 )
+occluder = SubResource( 3 )
+
+[node name="LightOccluder2D3" type="LightOccluder2D" parent="Images/FireBase3"]
+visible = false
+position = Vector2( 136.747, -30.9726 )
+occluder = SubResource( 3 )
+
+[node name="LightOccluder2D4" type="LightOccluder2D" parent="Images/FireBase3"]
+visible = false
+position = Vector2( 202.5, -30.9726 )
+occluder = SubResource( 3 )
+
+[node name="LightOccluder2D5" type="LightOccluder2D" parent="Images/FireBase3"]
+visible = false
+position = Vector2( 246.336, -30.9726 )
+occluder = SubResource( 3 )
+
+[node name="LightOccluder2D6" type="LightOccluder2D" parent="Images/FireBase3"]
+visible = false
+position = Vector2( 290.171, -30.9726 )
+occluder = SubResource( 3 )
+
+[node name="LightOccluder2D7" type="LightOccluder2D" parent="Images/FireBase3"]
+visible = false
+position = Vector2( 355.925, -30.9726 )
+occluder = SubResource( 3 )
+
+[node name="LightOccluder2D8" type="LightOccluder2D" parent="Images/FireBase3"]
+visible = false
+position = Vector2( 399.76, -9.05479 )
+occluder = SubResource( 3 )
+
+[node name="LightOccluder2D9" type="LightOccluder2D" parent="Images/FireBase3"]
+visible = false
+position = Vector2( 465.514, 34.7808 )
+occluder = SubResource( 3 )
+
+[node name="LightOccluder2D10" type="LightOccluder2D" parent="Images/FireBase3"]
+visible = false
+position = Vector2( 49.0753, -9.05479 )
+occluder = SubResource( 3 )
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Images/FireBase3"]
+visible = false
+occluder = SubResource( 3 )
+
+[node name="FireBase1" type="Sprite" parent="Images"]
+light_mask = 32
+position = Vector2( -13.2397, -111.274 )
+texture = ExtResource( 5 )
+
+[node name="FireBase2" type="Sprite" parent="Images"]
+visible = false
+light_mask = 32
+position = Vector2( -13.6986, -21.9178 )
+scale = Vector2( 1.14, 1.14 )
+texture = ExtResource( 7 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Images"]
+light_mask = 32
+position = Vector2( -19.1781, -427.397 )
+scale = Vector2( 1.05, 1.05 )
+frames = SubResource( 2 )
+animation = "high"
+
+[node name="AnimatedSpriteTimer" type="Timer" parent="Images"]
+wait_time = 0.5
+autostart = true
+
+[node name="SelfLight" type="Light2D" parent="Images"]
+position = Vector2( -19.1781, -295.89 )
+texture = ExtResource( 3 )
+mode = 2
+range_item_cull_mask = 32
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( 0, -32 )
+texture = ExtResource( 3 )
+mode = 2
+shadow_enabled = true
+shadow_filter = 3
+shadow_filter_smooth = 3.0
+
+[node name="RequirementsOverlay" type="Node2D" parent="."]
+position = Vector2( 4, 0 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="LastOutpostUpgradeAnforderungFire" type="Sprite" parent="RequirementsOverlay"]
+light_mask = 2048
+position = Vector2( -8, -272 )
+texture = ExtResource( 11 )
+
+[node name="LastOutpostItemWood" type="Sprite" parent="RequirementsOverlay"]
+light_mask = 2048
+position = Vector2( -8, -276 )
+scale = Vector2( 0.0990263, 0.0990263 )
+texture = ExtResource( 2 )
+
+[node name="Light2D" type="Light2D" parent="RequirementsOverlay"]
+position = Vector2( -4, -272 )
+texture = ExtResource( 3 )
+range_item_cull_mask = 2048
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -56, -48, -88, -32, -96, -16, -96, 0, -72, 16, -24, 24, 24, 24, 80, 16, 112, -8, 112, -24, 96, -40, 56, -48, 8, -56, -24, -56 )
+
+[node name="FlickerTimer" type="Timer" parent="."]
+wait_time = 0.101
+autostart = true
+
+[node name="LightEnergyTween" type="Tween" parent="."]
+
+[node name="AddSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+volume_db = 4.0
+
+[connection signal="timeout" from="Images/AnimatedSpriteTimer" to="." method="_on_AnimatedSpriteTimer_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="FlickerTimer" to="." method="_on_FlickerTimer_timeout"]

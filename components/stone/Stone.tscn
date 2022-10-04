@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://components/stone/Stone.gd" type="Script" id=1]
+[ext_resource path="res://assets/items/last_outpost_item_stone.png" type="Texture" id=2]
+[ext_resource path="res://assets/items/last_outpost_snow.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 80, 28 )
+
+[node name="Stone" type="StaticBody2D"]
+collision_layer = 3
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 12 )
+shape = SubResource( 1 )
+
+[node name="Stone" type="Sprite" parent="."]
+position = Vector2( 0, -88 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 2 )
+
+[node name="Snowpolygon" type="Polygon2D" parent="."]
+polygon = PoolVector2Array( -40, -64, -56, -64, -64, -56, -64, -24, 64, -24, 64, -56, 48, -64, 32, -64 )
+
+[node name="LastOutpostSnow" type="Sprite" parent="."]
+position = Vector2( 0, -48 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 3 )

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/wind_1.mp3-51fb19c6862311cb0482b1de46d7a303.mp3str"
+
+[deps]
+
+source_file="res://assets/ambience/wind_1.mp3"
+dest_files=[ "res://.import/wind_1.mp3-51fb19c6862311cb0482b1de46d7a303.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

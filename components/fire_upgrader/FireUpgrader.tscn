@@ -1,0 +1,62 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://components/fire_upgrader/FireUpgrader.gd" type="Script" id=1]
+[ext_resource path="res://components/requirements_overlay/RequirementsOverlay.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/upgraders/last_outpost_upgrade_fire_2.png" type="Texture" id=3]
+[ext_resource path="res://assets/upgraders/last_outpost_upgrade_fire_active2.png" type="Texture" id=4]
+[ext_resource path="res://assets/light/light.png" type="Texture" id=5]
+[ext_resource path="res://assets/last_outpost_camp_background_groeße.png" type="Texture" id=6]
+[ext_resource path="res://components/fire_upgrader/last_outpost_sound_upgrade_fire.wav" type="AudioStream" id=7]
+
+[sub_resource type="OccluderPolygon2D" id=3]
+polygon = PoolVector2Array( -56, -8, -64, 0, -56, 8, 48, 8, 56, 0, 56, -8, 40, -16, -8, -16, -32, -16, -48, -8 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "active",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 76, 16 )
+
+[node name="FireUpgrader" type="StaticBody2D"]
+collision_layer = 3
+script = ExtResource( 1 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = -5.0
+
+[node name="LastOutpostCampBackgroundGroeße" type="Sprite" parent="."]
+visible = false
+position = Vector2( -308, -298 )
+texture = ExtResource( 6 )
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource( 3 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+light_mask = 64
+position = Vector2( 14.9732, -61.225 )
+scale = Vector2( 0.291607, 0.291607 )
+frames = SubResource( 2 )
+
+[node name="RequirementsOverlay" parent="." instance=ExtResource( 2 )]
+position = Vector2( -16, -192 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 20, 8 )
+shape = SubResource( 1 )
+
+[node name="SelfLight" type="Light2D" parent="."]
+texture = ExtResource( 5 )
+mode = 2
+range_item_cull_mask = 64

@@ -1,0 +1,86 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://components/barrier/Barrier.gd" type="Script" id=1]
+[ext_resource path="res://assets/last_outpost_camp_background_groeße.png" type="Texture" id=2]
+[ext_resource path="res://components/requirements_overlay/RequirementsOverlay.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/upgraders/last_outpost_upgrade_repair_wall_2.png" type="Texture" id=4]
+[ext_resource path="res://assets/upgraders/last_outpost_upgrade_repair_wall_active2.png" type="Texture" id=5]
+[ext_resource path="res://assets/light/light.png" type="Texture" id=6]
+[ext_resource path="res://components/barrier/last_outpost_sound_repair.wav" type="AudioStream" id=7]
+[ext_resource path="res://components/barrier/last_outpost_sound_wall_destruction.wav" type="AudioStream" id=8]
+
+[sub_resource type="OccluderPolygon2D" id=3]
+polygon = PoolVector2Array( -72, -24, -112, -16, -104, 16, -72, 8, -48, 8, 56, 16, 80, 0, 80, -32 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "active",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 60, 28 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 104, 28 )
+
+[node name="Barrier" type="StaticBody2D" groups=["scene_manager_entity_nodes"]]
+collision_layer = 3
+script = ExtResource( 1 )
+__meta__ = {
+"entity_name": "Wall"
+}
+
+[node name="DestroySound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+volume_db = -3.0
+
+[node name="RepairSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = -6.0
+
+[node name="LastOutpostCampBackgroundGroeße" type="Sprite" parent="."]
+visible = false
+position = Vector2( -268, -159 )
+texture = ExtResource( 2 )
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource( 3 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+light_mask = 256
+position = Vector2( -12.143, -44.6453 )
+scale = Vector2( 0.308199, 0.308199 )
+frames = SubResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 28, -28 )
+shape = SubResource( 1 )
+
+[node name="RequirementsOverlay" parent="." instance=ExtResource( 3 )]
+position = Vector2( -24, -224 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[node name="Light2D" type="Light2D" parent="."]
+texture = ExtResource( 6 )
+mode = 2
+range_item_cull_mask = 256
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2( -88, -8 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 72, -4 )
+shape = SubResource( 4 )
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

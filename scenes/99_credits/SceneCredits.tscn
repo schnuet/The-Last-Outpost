@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/99_credits/SceneCredits.gd" type="Script" id=1]
+[ext_resource path="res://scenes/99_credits/last_outpost_credit_screen.png" type="Texture" id=2]
+[ext_resource path="res://scenes/99_credits/last_outpost_button_back_hover.png" type="Texture" id=3]
+[ext_resource path="res://scenes/99_credits/last_outpost_button_back.png" type="Texture" id=4]
+
+[node name="CreditsScene" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="LastOutpostCreditScreen" type="Sprite" parent="."]
+position = Vector2( 640, 360 )
+texture = ExtResource( 2 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="BackButton" type="TextureButton" parent="CanvasLayer"]
+margin_left = 1104.0
+margin_top = 632.0
+margin_right = 1242.0
+margin_bottom = 682.0
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 3 )
+texture_hover = ExtResource( 3 )
+texture_disabled = ExtResource( 4 )
+texture_focused = ExtResource( 3 )
+
+[connection signal="hidden" from="." to="." method="_on_CreditsScene_hidden"]
+[connection signal="shown" from="." to="." method="_on_CreditsScene_shown"]
+[connection signal="pressed" from="CanvasLayer/BackButton" to="." method="_on_BackButton_pressed"]

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/last_outpost_sound_walking_snow.ogg-9d04bde73fed4949236c3c8b98bfa972.oggstr"
+
+[deps]
+
+source_file="res://components/player/last_outpost_sound_walking_snow.ogg"
+dest_files=[ "res://.import/last_outpost_sound_walking_snow.ogg-9d04bde73fed4949236c3c8b98bfa972.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

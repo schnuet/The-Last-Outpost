@@ -1,0 +1,1010 @@
+[gd_scene load_steps=66 format=2]
+
+[ext_resource path="res://scenes/02_game/SceneGame.gd" type="Script" id=1]
+[ext_resource path="res://components/player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://components/fire/Fire.tscn" type="PackedScene" id=3]
+[ext_resource path="res://components/wood/Wood.tscn" type="PackedScene" id=4]
+[ext_resource path="res://components/leaf/Leaf.tscn" type="PackedScene" id=5]
+[ext_resource path="res://components/stone/Stone.tscn" type="PackedScene" id=6]
+[ext_resource path="res://components/camera/Camera.tscn" type="PackedScene" id=7]
+[ext_resource path="res://components/barrier/Barrier.tscn" type="PackedScene" id=8]
+[ext_resource path="res://components/spawner/Spawner.tscn" type="PackedScene" id=9]
+[ext_resource path="res://components/barrier_upgrader/BarrierUpgrader.tscn" type="PackedScene" id=10]
+[ext_resource path="res://components/fire_upgrader/FireUpgrader.tscn" type="PackedScene" id=11]
+[ext_resource path="res://components/health_upgrader/HealthUpgrader.tscn" type="PackedScene" id=12]
+[ext_resource path="res://components/cold_area/ColdArea.tscn" type="PackedScene" id=13]
+[ext_resource path="res://components/warm_area/WarmArea.tscn" type="PackedScene" id=14]
+[ext_resource path="res://assets/icons/last_outpost_ui_background_left.png" type="Texture" id=15]
+[ext_resource path="res://components/darkness/Darkness.tscn" type="PackedScene" id=16]
+[ext_resource path="res://assets/ambience/wind_loop_1.ogg" type="AudioStream" id=17]
+[ext_resource path="res://assets/ambience/FadeInPlayer.gd" type="Script" id=18]
+[ext_resource path="res://assets/effects/snow.png" type="Texture" id=19]
+[ext_resource path="res://components/map_stone_a/StoneA.tscn" type="PackedScene" id=20]
+[ext_resource path="res://assets/items/last_outpost_item_leaf.png" type="Texture" id=21]
+[ext_resource path="res://assets/items/last_outpost_item_stone.png" type="Texture" id=22]
+[ext_resource path="res://assets/items/last_outpost_item_wood.png" type="Texture" id=23]
+[ext_resource path="res://assets/ui_theme/label_theme.tres" type="Theme" id=24]
+[ext_resource path="res://components/bar/Bar.tscn" type="PackedScene" id=25]
+[ext_resource path="res://assets/camp/last_outpost_camp_floor.png" type="Texture" id=26]
+[ext_resource path="res://assets/camp/last_outpost_barrikade_1_gut.png" type="Texture" id=27]
+[ext_resource path="res://assets/camp/last_outpost_barrikade_1_schlecht.png" type="Texture" id=28]
+[ext_resource path="res://assets/camp/last_outpost_barrikade_2_schlecht.png" type="Texture" id=29]
+[ext_resource path="res://assets/camp/last_outpost_barrikade_2_mittel.png" type="Texture" id=30]
+[ext_resource path="res://assets/camp/last_outpost_barrikade_2_gut.png" type="Texture" id=31]
+[ext_resource path="res://assets/camp/last_outpost_barrikade_3_schlecht.png" type="Texture" id=32]
+[ext_resource path="res://assets/camp/last_outpost_barrikade_3_mittel.png" type="Texture" id=33]
+[ext_resource path="res://assets/camp/last_outpost_barrikade_3_gut.png" type="Texture" id=34]
+[ext_resource path="res://assets/ui_theme/last_outpost_ui_background_right.png" type="Texture" id=35]
+[ext_resource path="res://assets/icons/icon_wall.png" type="Texture" id=36]
+[ext_resource path="res://assets/icons/icon_heart.png" type="Texture" id=37]
+[ext_resource path="res://assets/icons/icon_fire.png" type="Texture" id=38]
+[ext_resource path="res://assets/camp/last_outpost_camp_snow_overlays.png" type="Texture" id=39]
+[ext_resource path="res://assets/camp/last_outpost_barrikade_1_mittel.png" type="Texture" id=40]
+[ext_resource path="res://components/sunrise_bar/SunriseBar.tscn" type="PackedScene" id=41]
+[ext_resource path="res://scenes/02_game/snow/last_outpost_background_floortile2.png" type="Texture" id=42]
+[ext_resource path="res://scenes/02_game/snow/last_outpost_background_floortile4.png" type="Texture" id=43]
+[ext_resource path="res://scenes/02_game/snow/last_outpost_background_floortile3.png" type="Texture" id=44]
+[ext_resource path="res://scenes/02_game/snow/last_outpost_background_floortile1.png" type="Texture" id=45]
+[ext_resource path="res://components/map_tree_b/TreeB.tscn" type="PackedScene" id=46]
+[ext_resource path="res://components/map_stone_b/StoneB.tscn" type="PackedScene" id=47]
+[ext_resource path="res://components/map_tree_a/TreeA.tscn" type="PackedScene" id=48]
+[ext_resource path="res://scenes/02_game/last_outpost_sound_lawine.wav" type="AudioStream" id=49]
+[ext_resource path="res://scenes/02_game/Avalanche.gd" type="Script" id=50]
+[ext_resource path="res://scenes/02_game/last_outpost_background_snow.png" type="Texture" id=51]
+[ext_resource path="res://scenes/02_game/last_outpost_background_snow_right.png" type="Texture" id=52]
+[ext_resource path="res://scenes/02_game/last_outpost_background_snow_left.png" type="Texture" id=53]
+
+[sub_resource type="Animation" id=10]
+resource_name = "Blink"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.317647 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "Blink"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.317647 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "Blink"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.317647 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 250, 68 )
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ ExtResource( 28 ) ],
+"loop": true,
+"name": "lvl-1-bad",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 27 ) ],
+"loop": true,
+"name": "lvl-1-good",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 40 ) ],
+"loop": true,
+"name": "lvl-1-middle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 29 ) ],
+"loop": true,
+"name": "lvl-2-bad",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 31 ) ],
+"loop": true,
+"name": "lvl-2-good",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 30 ) ],
+"loop": true,
+"name": "lvl-2-middle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 32 ) ],
+"loop": true,
+"name": "lvl-3-bad",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 34 ) ],
+"loop": true,
+"name": "lvl-3-good",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 33 ) ],
+"loop": true,
+"name": "lvl-3-middle",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 600, 400 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 2000, 10 )
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 10, 2000 )
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0.0037037, 0.557954 ), 0.0, 0.0, 0, 0, Vector2( 0.118519, 0.285227 ), 0.0, 0.0, 0, 0, Vector2( 0.192593, 0.639773 ), 0.0, 0.0, 0, 0, Vector2( 0.292593, 0.103409 ), 0.0, 0.0, 0, 0, Vector2( 0.362963, 0.594318 ), 0.0, 0.0, 0, 0, Vector2( 0.503704, 0.776136 ), 0.0, 0.0, 0, 0, Vector2( 0.618518, 0.130682 ), 0.0, 0.0, 0, 0, Vector2( 0.714815, 0.639773 ), 0.0, 0.0, 0, 0, Vector2( 0.82963, 0.176136 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.5125 ), 0.0, 0.0, 0, 0 ]
+
+[node name="GameScene" type="Node2D" groups=["scene_manager_entity_nodes"]]
+script = ExtResource( 1 )
+__meta__ = {
+"entity_name": "Game"
+}
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="SunriseBar" parent="HUD" instance=ExtResource( 41 )]
+margin_left = 660.0
+margin_top = 688.0
+margin_right = 660.0
+margin_bottom = 688.0
+rect_scale = Vector2( 0.75, 0.7 )
+
+[node name="BackgroundLeft" type="TextureRect" parent="HUD"]
+margin_right = 1280.0
+margin_bottom = 720.0
+texture = ExtResource( 15 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="LeftUI" type="MarginContainer" parent="HUD"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -118.0
+margin_right = 219.0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 10
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 10
+
+[node name="BottomLeftUI" type="VBoxContainer" parent="HUD/LeftUI"]
+margin_left = 20.0
+margin_top = 10.0
+margin_right = 199.0
+margin_bottom = 111.0
+custom_constants/separation = 13
+
+[node name="ItemCountLabels" type="HBoxContainer" parent="HUD/LeftUI/BottomLeftUI"]
+margin_right = 179.0
+margin_bottom = 55.0
+
+[node name="Wood" type="VBoxContainer" parent="HUD/LeftUI/BottomLeftUI/ItemCountLabels"]
+margin_right = 50.0
+margin_bottom = 55.0
+
+[node name="WoodCountLabel" type="Label" parent="HUD/LeftUI/BottomLeftUI/ItemCountLabels/Wood" groups=["scene_manager_entity_nodes"]]
+margin_right = 50.0
+margin_bottom = 21.0
+theme = ExtResource( 24 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "0"
+align = 1
+__meta__ = {
+"entity_name": "WoodCountLabel"
+}
+
+[node name="TextureRect" type="TextureRect" parent="HUD/LeftUI/BottomLeftUI/ItemCountLabels/Wood"]
+margin_top = 25.0
+margin_right = 50.0
+margin_bottom = 55.0
+rect_min_size = Vector2( 50, 30 )
+texture = ExtResource( 23 )
+expand = true
+stretch_mode = 5
+
+[node name="Stone" type="VBoxContainer" parent="HUD/LeftUI/BottomLeftUI/ItemCountLabels"]
+margin_left = 54.0
+margin_right = 104.0
+margin_bottom = 55.0
+
+[node name="StoneCountLabel" type="Label" parent="HUD/LeftUI/BottomLeftUI/ItemCountLabels/Stone" groups=["scene_manager_entity_nodes"]]
+margin_right = 50.0
+margin_bottom = 21.0
+theme = ExtResource( 24 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "0"
+align = 1
+__meta__ = {
+"entity_name": "StoneCountLabel"
+}
+
+[node name="TextureRect" type="TextureRect" parent="HUD/LeftUI/BottomLeftUI/ItemCountLabels/Stone"]
+margin_top = 25.0
+margin_right = 50.0
+margin_bottom = 55.0
+rect_min_size = Vector2( 50, 30 )
+texture = ExtResource( 22 )
+expand = true
+stretch_mode = 6
+
+[node name="Leaf" type="VBoxContainer" parent="HUD/LeftUI/BottomLeftUI/ItemCountLabels"]
+margin_left = 108.0
+margin_right = 158.0
+margin_bottom = 55.0
+
+[node name="LeafCountLabel" type="Label" parent="HUD/LeftUI/BottomLeftUI/ItemCountLabels/Leaf" groups=["scene_manager_entity_nodes"]]
+margin_right = 50.0
+margin_bottom = 21.0
+theme = ExtResource( 24 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "0"
+align = 1
+__meta__ = {
+"entity_name": "LeafCountLabel"
+}
+
+[node name="TextureRect" type="TextureRect" parent="HUD/LeftUI/BottomLeftUI/ItemCountLabels/Leaf"]
+margin_top = 25.0
+margin_right = 50.0
+margin_bottom = 55.0
+rect_min_size = Vector2( 50, 30 )
+texture = ExtResource( 21 )
+expand = true
+stretch_mode = 6
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/LeftUI/BottomLeftUI"]
+margin_top = 68.0
+margin_right = 179.0
+margin_bottom = 101.0
+custom_constants/separation = 20
+
+[node name="Icon" type="Control" parent="HUD/LeftUI/BottomLeftUI/HBoxContainer"]
+margin_right = 30.0
+margin_bottom = 33.0
+rect_min_size = Vector2( 30, 25 )
+
+[node name="BarrierIcon" type="Sprite" parent="HUD/LeftUI/BottomLeftUI/HBoxContainer/Icon" groups=["scene_manager_entity_nodes"]]
+show_behind_parent = true
+texture = ExtResource( 36 )
+centered = false
+__meta__ = {
+"entity_name": "BarrierIcon"
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/LeftUI/BottomLeftUI/HBoxContainer/Icon/BarrierIcon"]
+anims/Blink = SubResource( 10 )
+anims/RESET = SubResource( 11 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/LeftUI/BottomLeftUI/HBoxContainer"]
+margin_left = 50.0
+margin_right = 113.0
+margin_bottom = 33.0
+rect_min_size = Vector2( 0, 33 )
+alignment = 1
+
+[node name="BarrierBar" parent="HUD/LeftUI/BottomLeftUI/HBoxContainer/VBoxContainer" groups=["scene_manager_entity_nodes"] instance=ExtResource( 25 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 5.0
+margin_right = 63.0
+margin_bottom = 27.0
+__meta__ = {
+"entity_name": "BarrierBar"
+}
+
+[node name="BackgroundRight" type="TextureRect" parent="HUD"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -240.0
+margin_top = -96.0
+margin_right = 1040.0
+margin_bottom = 624.0
+texture = ExtResource( 35 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="RightUI" type="MarginContainer" parent="HUD"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -263.0
+margin_top = -84.0
+custom_constants/margin_right = 18
+custom_constants/margin_top = 15
+custom_constants/margin_left = 50
+custom_constants/margin_bottom = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/RightUI"]
+margin_left = 50.0
+margin_top = 15.0
+margin_right = 245.0
+margin_bottom = 84.0
+custom_constants/separation = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/RightUI/VBoxContainer"]
+margin_right = 195.0
+margin_bottom = 30.0
+custom_constants/separation = 13
+alignment = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/RightUI/VBoxContainer/HBoxContainer"]
+margin_left = 94.0
+margin_right = 157.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 0, 30 )
+alignment = 1
+
+[node name="HealthBar" parent="HUD/RightUI/VBoxContainer/HBoxContainer/VBoxContainer" groups=["scene_manager_entity_nodes"] instance=ExtResource( 25 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 4.0
+margin_right = 63.0
+margin_bottom = 26.0
+__meta__ = {
+"entity_name": "HealthBar"
+}
+
+[node name="Icon" type="Control" parent="HUD/RightUI/VBoxContainer/HBoxContainer"]
+margin_left = 170.0
+margin_right = 195.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 25, 25 )
+
+[node name="HealthIcon" type="Sprite" parent="HUD/RightUI/VBoxContainer/HBoxContainer/Icon" groups=["scene_manager_entity_nodes"]]
+show_behind_parent = true
+texture = ExtResource( 37 )
+centered = false
+__meta__ = {
+"entity_name": "HealthIcon"
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/RightUI/VBoxContainer/HBoxContainer/Icon/HealthIcon"]
+anims/Blink = SubResource( 8 )
+anims/RESET = SubResource( 9 )
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HUD/RightUI/VBoxContainer"]
+margin_top = 31.0
+margin_right = 195.0
+margin_bottom = 61.0
+grow_horizontal = 0
+custom_constants/separation = 10
+alignment = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/RightUI/VBoxContainer/HBoxContainer2"]
+margin_left = 97.0
+margin_right = 160.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 0, 30 )
+alignment = 1
+
+[node name="FireBar" parent="HUD/RightUI/VBoxContainer/HBoxContainer2/VBoxContainer" groups=["scene_manager_entity_nodes"] instance=ExtResource( 25 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 4.0
+margin_right = 63.0
+margin_bottom = 26.0
+__meta__ = {
+"entity_name": "FireBar"
+}
+
+[node name="Icon" type="Control" parent="HUD/RightUI/VBoxContainer/HBoxContainer2"]
+margin_left = 170.0
+margin_right = 195.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 25, 25 )
+
+[node name="FireIcon" type="Sprite" parent="HUD/RightUI/VBoxContainer/HBoxContainer2/Icon" groups=["scene_manager_entity_nodes"]]
+show_behind_parent = true
+texture = ExtResource( 38 )
+centered = false
+__meta__ = {
+"entity_name": "FireIcon"
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/RightUI/VBoxContainer/HBoxContainer2/Icon/FireIcon"]
+anims/Blink = SubResource( 6 )
+anims/RESET = SubResource( 7 )
+
+[node name="Background" type="Node2D" parent="."]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="RoomBounds" type="Polygon2D" parent="Background"]
+scale = Vector2( 0.0338589, 1 )
+color = Color( 0.0509804, 0.0509804, 0.0509804, 1 )
+polygon = PoolVector2Array( 0, 0, 37803.9, 0, 37803.9, 720, 0, 720 )
+
+[node name="RoomBounds2" type="Polygon2D" parent="Background"]
+position = Vector2( 0, 720 )
+scale = Vector2( 0.0338589, 1 )
+color = Color( 0.992157, 0.992157, 0.992157, 1 )
+polygon = PoolVector2Array( 0, 0, 37803.9, 0, 37803.9, 720, 0, 720 )
+
+[node name="RoomBounds3" type="Polygon2D" parent="Background"]
+position = Vector2( 0, 1440 )
+scale = Vector2( 0.0338589, 1 )
+color = Color( 0.992157, 0.992157, 0.992157, 1 )
+polygon = PoolVector2Array( 0, 0, 37803.9, 0, 37803.9, 720, 0, 720 )
+
+[node name="RoomBounds4" type="Polygon2D" parent="Background"]
+position = Vector2( 0, 2160 )
+scale = Vector2( 0.0338589, 1 )
+color = Color( 0.992157, 0.992157, 0.992157, 1 )
+polygon = PoolVector2Array( 0, 0, 37803.9, 0, 37803.9, 720, 0, 720 )
+
+[node name="LastOutpostCampFloor" type="Sprite" parent="Background"]
+position = Vector2( 640, 360 )
+texture = ExtResource( 26 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="LastOutpostCampFloor2" type="Sprite" parent="Background"]
+position = Vector2( 528, 360 )
+texture = ExtResource( 26 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="LastOutpostBackgroundSnow" type="Sprite" parent="Background"]
+position = Vector2( 640, 1080 )
+texture = ExtResource( 51 )
+
+[node name="LastOutpostBackgroundSnow2" type="Sprite" parent="Background"]
+position = Vector2( 640, 1800 )
+texture = ExtResource( 51 )
+
+[node name="LastOutpostBackgroundSnow3" type="Sprite" parent="Background"]
+position = Vector2( 640, 2520 )
+texture = ExtResource( 51 )
+
+[node name="LastOutpostCampFloor3" type="Sprite" parent="Background"]
+position = Vector2( 680, 360 )
+texture = ExtResource( 26 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BehindFireBlock" type="StaticBody2D" parent="Background"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Background/BehindFireBlock"]
+position = Vector2( 722, 452 )
+shape = SubResource( 12 )
+
+[node name="Darkness" parent="." instance=ExtResource( 16 )]
+
+[node name="Camera" parent="." instance=ExtResource( 7 )]
+position = Vector2( 640, 360 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BarrierBackground" type="AnimatedSprite" parent="." groups=["scene_manager_entity_nodes"]]
+position = Vector2( 640, 360 )
+frames = SubResource( 5 )
+animation = "lvl-3-good"
+__meta__ = {
+"entity_name": "BarrierBackground"
+}
+
+[node name="BackgroundBody" type="StaticBody2D" parent="BarrierBackground"]
+visible = false
+position = Vector2( -640, -336 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BarrierBackground/BackgroundBody"]
+polygon = PoolVector2Array( 0, 512, 64, 560, 192, 560, 272, 456, 496, 360, 672, 360, 824, 376, 952, 432, 1040, 480, 1048, 552, 1152, 568, 1280, 664, 1280, 0, 0, 0 )
+
+[node name="Snow" type="Node2D" parent="."]
+position = Vector2( 0, 720 )
+
+[node name="f4_1" type="Sprite" parent="Snow"]
+position = Vector2( 1024, 432 )
+texture = ExtResource( 43 )
+centered = false
+
+[node name="f4_4" type="Sprite" parent="Snow"]
+position = Vector2( 576, 432 )
+texture = ExtResource( 43 )
+centered = false
+
+[node name="f4_5" type="Sprite" parent="Snow"]
+position = Vector2( 576, 432 )
+texture = ExtResource( 43 )
+centered = false
+
+[node name="f4_6" type="Sprite" parent="Snow"]
+position = Vector2( 192, 1072 )
+texture = ExtResource( 43 )
+centered = false
+
+[node name="f4_7" type="Sprite" parent="Snow"]
+position = Vector2( 896, 1200 )
+texture = ExtResource( 43 )
+centered = false
+
+[node name="f4_8" type="Sprite" parent="Snow"]
+position = Vector2( 576, 880 )
+texture = ExtResource( 43 )
+centered = false
+
+[node name="f4_9" type="Sprite" parent="Snow"]
+position = Vector2( 192, 1712 )
+texture = ExtResource( 43 )
+centered = false
+
+[node name="f4_10" type="Sprite" parent="Snow"]
+position = Vector2( 832, 1840 )
+texture = ExtResource( 43 )
+centered = false
+
+[node name="f4_11" type="Sprite" parent="Snow"]
+position = Vector2( 576, 1456 )
+texture = ExtResource( 43 )
+centered = false
+
+[node name="f4_12" type="Sprite" parent="Snow"]
+position = Vector2( 576, 1456 )
+texture = ExtResource( 43 )
+centered = false
+
+[node name="f4_2" type="Sprite" parent="Snow"]
+position = Vector2( 256, 560 )
+texture = ExtResource( 43 )
+centered = false
+
+[node name="f4_3" type="Sprite" parent="Snow"]
+position = Vector2( 960, 752 )
+texture = ExtResource( 43 )
+centered = false
+
+[node name="f1_2" type="Sprite" parent="Snow"]
+texture = ExtResource( 45 )
+centered = false
+
+[node name="f1_1" type="Sprite" parent="Snow"]
+position = Vector2( 200, 0 )
+texture = ExtResource( 45 )
+centered = false
+
+[node name="f1_3" type="Sprite" parent="Snow"]
+position = Vector2( 768, 304 )
+texture = ExtResource( 45 )
+centered = false
+
+[node name="f1_4" type="Sprite" parent="Snow"]
+position = Vector2( 768, 624 )
+texture = ExtResource( 45 )
+centered = false
+
+[node name="f1_5" type="Sprite" parent="Snow"]
+position = Vector2( -8, 936 )
+texture = ExtResource( 45 )
+centered = false
+
+[node name="f1_6" type="Sprite" parent="Snow"]
+position = Vector2( -8, 1576 )
+texture = ExtResource( 45 )
+centered = false
+
+[node name="f1_7" type="Sprite" parent="Snow"]
+position = Vector2( -8, 1968 )
+texture = ExtResource( 45 )
+centered = false
+
+[node name="f1_8" type="Sprite" parent="Snow"]
+position = Vector2( 632, 1968 )
+texture = ExtResource( 45 )
+centered = false
+
+[node name="f1_9" type="Sprite" parent="Snow"]
+position = Vector2( 632, 1968 )
+texture = ExtResource( 45 )
+centered = false
+
+[node name="f1_10" type="Sprite" parent="Snow"]
+position = Vector2( 1024, 1584 )
+texture = ExtResource( 45 )
+centered = false
+
+[node name="f1_11" type="Sprite" parent="Snow"]
+position = Vector2( 1088, 1072 )
+texture = ExtResource( 45 )
+centered = false
+
+[node name="f1_12" type="Sprite" parent="Snow"]
+position = Vector2( 832, 944 )
+texture = ExtResource( 45 )
+centered = false
+
+[node name="f1_13" type="Sprite" parent="Snow"]
+position = Vector2( 1216, 688 )
+texture = ExtResource( 45 )
+centered = false
+
+[node name="f2_1" type="Sprite" parent="Snow"]
+position = Vector2( 704, 112 )
+texture = ExtResource( 42 )
+centered = false
+
+[node name="f2_3" type="Sprite" parent="Snow"]
+position = Vector2( 0, 432 )
+texture = ExtResource( 42 )
+centered = false
+
+[node name="f2_4" type="Sprite" parent="Snow"]
+position = Vector2( 320, 816 )
+texture = ExtResource( 42 )
+centered = false
+
+[node name="f2_5" type="Sprite" parent="Snow"]
+position = Vector2( -136, 1328 )
+texture = ExtResource( 42 )
+centered = false
+
+[node name="f2_6" type="Sprite" parent="Snow"]
+position = Vector2( 256, 1392 )
+texture = ExtResource( 42 )
+centered = false
+
+[node name="f2_7" type="Sprite" parent="Snow"]
+position = Vector2( 576, 1712 )
+texture = ExtResource( 42 )
+centered = false
+
+[node name="f2_8" type="Sprite" parent="Snow"]
+position = Vector2( 1216, 1968 )
+texture = ExtResource( 42 )
+centered = false
+
+[node name="f3" type="Sprite" parent="Snow"]
+position = Vector2( 1024, 112 )
+texture = ExtResource( 44 )
+centered = false
+
+[node name="f3_1" type="Sprite" parent="Snow"]
+position = Vector2( 504, 688 )
+texture = ExtResource( 44 )
+centered = false
+
+[node name="f3_2" type="Sprite" parent="Snow"]
+position = Vector2( 576, 1200 )
+texture = ExtResource( 44 )
+centered = false
+
+[node name="f3_3" type="Sprite" parent="Snow"]
+position = Vector2( 320, 1968 )
+texture = ExtResource( 44 )
+centered = false
+
+[node name="f2_2" type="Sprite" parent="Snow"]
+position = Vector2( 448, 176 )
+texture = ExtResource( 45 )
+centered = false
+
+[node name="YSort" type="YSort" parent="." groups=["scene_manager_entity_nodes"]]
+__meta__ = {
+"entity_name": "MainStage"
+}
+
+[node name="BarrierRepairer" parent="YSort" instance=ExtResource( 8 )]
+position = Vector2( 907, 520 )
+
+[node name="FireUpgrader" parent="YSort" instance=ExtResource( 11 )]
+position = Vector2( 939, 654 )
+
+[node name="BarrierUpgrader" parent="YSort" instance=ExtResource( 10 )]
+position = Vector2( 404, 657 )
+
+[node name="HealthUpgrader" parent="YSort" instance=ExtResource( 12 )]
+position = Vector2( 438, 504 )
+
+[node name="Player" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 792, 640 )
+
+[node name="Fire" parent="YSort" groups=["scene_manager_entity_nodes"] instance=ExtResource( 3 )]
+position = Vector2( 648, 566 )
+__meta__ = {
+"entity_name": "Fire"
+}
+
+[node name="Leaf" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( 864, 1168 )
+
+[node name="Wood" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( 432, 1120 )
+
+[node name="Wood2" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( 144, 1488 )
+
+[node name="Wood3" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( 696, 1904 )
+
+[node name="Wood4" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( 664, 1424 )
+
+[node name="Wood5" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( 1184, 1352 )
+
+[node name="Stone" parent="YSort" instance=ExtResource( 6 )]
+position = Vector2( 168, 1120 )
+
+[node name="LastOutpostCampSnowOverlays" type="Sprite" parent="YSort"]
+position = Vector2( 640, 860 )
+texture = ExtResource( 39 )
+offset = Vector2( 0, -500 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="YSort/LastOutpostCampSnowOverlays"]
+position = Vector2( -640, -844 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="YSort/LastOutpostCampSnowOverlays/StaticBody2D"]
+polygon = PoolVector2Array( 0, 504, 144, 528, 184, 576, 192, 624, 272, 688, 312, 704, 368, 720, 600, 752, 536, 904, -8, 992 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="YSort/LastOutpostCampSnowOverlays"]
+position = Vector2( 0, -484 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="YSort/LastOutpostCampSnowOverlays/StaticBody2D2"]
+polygon = PoolVector2Array( 656, 264, 552, 280, 472, 312, 352, 328, 280, 376, 128, 384, 120, 424, 160, 488, 448, 544, 656, 600 )
+
+[node name="Tree B" parent="YSort" instance=ExtResource( 46 )]
+position = Vector2( 904, 2360 )
+
+[node name="Tree B2" parent="YSort" instance=ExtResource( 46 )]
+position = Vector2( 32, 1032 )
+
+[node name="Tree A" parent="YSort" instance=ExtResource( 48 )]
+position = Vector2( 64, 2176 )
+
+[node name="Tree A2" parent="YSort" instance=ExtResource( 48 )]
+position = Vector2( 1240, 1152 )
+
+[node name="Stone B" parent="YSort" instance=ExtResource( 47 )]
+position = Vector2( 984, 1776 )
+
+[node name="Stone B2" parent="YSort" instance=ExtResource( 47 )]
+position = Vector2( 448, 952 )
+
+[node name="Stone A" parent="YSort" instance=ExtResource( 20 )]
+position = Vector2( 296, 1688 )
+
+[node name="Stone A2" parent="YSort" instance=ExtResource( 20 )]
+position = Vector2( 832, 912 )
+
+[node name="LastOutpostBackgroundSnowLeft" type="Sprite" parent="YSort"]
+position = Vector2( 280, 783 )
+texture = ExtResource( 53 )
+offset = Vector2( 0, 40 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="LastOutpostBackgroundSnowRight" type="Sprite" parent="YSort"]
+position = Vector2( 1044, 783 )
+texture = ExtResource( 52 )
+offset = Vector2( 0, 40 )
+
+[node name="Regions" type="Node2D" parent="."]
+visible = false
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Spawner2" parent="Regions" instance=ExtResource( 9 )]
+visible = false
+position = Vector2( 640, 1384 )
+delay = 2
+
+[node name="CollisionShape2D" parent="Regions/Spawner2" index="0"]
+shape = SubResource( 4 )
+
+[node name="Spawner3" parent="Regions" instance=ExtResource( 9 )]
+visible = false
+position = Vector2( 640, 1416 )
+delay = 6
+
+[node name="CollisionShape2D" parent="Regions/Spawner3" index="0"]
+shape = SubResource( 4 )
+
+[node name="Spawner4" parent="Regions" instance=ExtResource( 9 )]
+visible = false
+position = Vector2( 640, 1784 )
+delay = 6
+
+[node name="CollisionShape2D" parent="Regions/Spawner4" index="0"]
+shape = SubResource( 4 )
+
+[node name="Spawner5" parent="Regions" instance=ExtResource( 9 )]
+visible = false
+position = Vector2( 632, 1968 )
+delay = 6
+
+[node name="CollisionShape2D" parent="Regions/Spawner5" index="0"]
+shape = SubResource( 4 )
+
+[node name="Spawner" parent="Regions" instance=ExtResource( 9 )]
+position = Vector2( 640, 2096 )
+
+[node name="WarmArea" parent="Regions" instance=ExtResource( 14 )]
+visible = false
+position = Vector2( 640, 298 )
+
+[node name="ColdArea" parent="Regions" instance=ExtResource( 13 )]
+visible = false
+position = Vector2( 632, 2008 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Walls" type="Node2D" parent="."]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="WallTop" type="StaticBody2D" parent="Walls"]
+position = Vector2( 712, -8 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WallTop"]
+shape = SubResource( 2 )
+
+[node name="WallBottom" type="StaticBody2D" parent="Walls"]
+position = Vector2( 624, 2888 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WallBottom"]
+shape = SubResource( 2 )
+
+[node name="WallLeft" type="StaticBody2D" parent="Walls"]
+position = Vector2( -8, 1288 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WallLeft"]
+position = Vector2( 0, 392 )
+shape = SubResource( 1 )
+
+[node name="WallRight" type="StaticBody2D" parent="Walls"]
+position = Vector2( 1288, 1352 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WallRight"]
+position = Vector2( 0, 392 )
+shape = SubResource( 1 )
+
+[node name="WindLoop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 17 )
+volume_db = -7.0
+bus = "Wind"
+script = ExtResource( 18 )
+target_volume = -2
+
+[node name="SnowParticles" type="CPUParticles2D" parent="."]
+position = Vector2( -160, -224 )
+rotation = -0.86791
+emitting = false
+amount = 500
+lifetime = 1.5
+randomness = 0.14
+texture = ExtResource( 19 )
+emission_shape = 2
+emission_rect_extents = Vector2( 640, 1 )
+direction = Vector2( 0, 1 )
+spread = 0.0
+gravity = Vector2( 300, 2000 )
+initial_velocity = 300.0
+initial_velocity_random = 0.08
+scale_amount = 0.5
+scale_amount_random = 1.0
+scale_amount_curve = SubResource( 3 )
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color( 0.3, 0.256, 0.234, 1 )
+
+[node name="Avalanche" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 49 )
+volume_db = -16.314
+script = ExtResource( 50 )
+
+[node name="Timer" type="Timer" parent="Avalanche"]
+wait_time = 20.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Avalanche/Timer" to="Avalanche" method="_on_Timer_timeout"]
+
+[editable path="Regions/Spawner2"]
+[editable path="Regions/Spawner3"]
+[editable path="Regions/Spawner4"]
+[editable path="Regions/Spawner5"]
