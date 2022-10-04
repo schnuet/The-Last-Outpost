@@ -21,7 +21,7 @@ func hide():
 	generally_visible = false;
 	.hide();
 
-func _process(delta):
+func _process(_delta):
 	var parent = get_parent();
 	
 	if not generally_visible:

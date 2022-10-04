@@ -21,7 +21,7 @@ func _ready():
 	
 	$RequirementsOverlay.hide();
 
-func _process(delta):
+func _process(_delta):
 	interact_available = game.has_resources(required_wood, required_stone, required_leaf);
 	
 func interact(_player):

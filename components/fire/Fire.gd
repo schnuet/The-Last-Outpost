@@ -39,13 +39,13 @@ func _ready():
 	player = SceneManager.get_entity("Player");
 	
 	set_level(1);
-	set_max_health(6);
+	set_max_health(5);
 	set_health(max_health);
 	
 	$RequirementsOverlay.hide();
 
 
-func _process(delta):
+func _process(_delta):
 	interact_available = game.has_resources(required_wood, required_stone, required_leaf);
 	
 
@@ -120,7 +120,7 @@ func set_level(val):
 	level = val;
 	
 	if level == 2:
-		set_max_health(7);
+		set_max_health(6);
 	if level == 3:
 		set_max_health(8);
 	

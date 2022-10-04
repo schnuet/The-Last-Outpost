@@ -38,7 +38,7 @@ func _ready():
 	set_max_health(10);
 	set_health(max_health);
 
-func _process(delta):
+func _process(_delta):
 	interact_available = game.has_resources(required_wood, required_stone, required_leaf);
 
 func set_max_health(value):
