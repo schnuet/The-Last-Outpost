@@ -27,5 +27,5 @@ func interact(_player):
 
 # remove item from range if we have enough already
 func _on_enter_range():
-	if game.leaf >= 5:
+	if game.leaf >= 10:
 		player._on_InteractArea2D_body_exited(self);

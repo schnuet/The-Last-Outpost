@@ -50,22 +50,32 @@ func consume_resources(w, s, l):
 
 func set_wood(value):
 	wood = value;
-	var wood_label = wood_count_label;
-	wood_label.text = str(value);
+	
+	wood_count_label.text = str(value);
 	if value >= 10:
-		wood_label.set("custom_colors/font_color", Color(primary_color));
+		wood_count_label.set("custom_colors/font_color", Color(primary_color));
 	else:
-		wood_label.set("custom_colors/font_color", Color.black);
+		wood_count_label.set("custom_colors/font_color", Color.black);
 
 
 func set_stone(value):
 	stone = value;
 	stone_count_label.text = str(value);
 	
+	if value >= 10:
+		stone_count_label.set("custom_colors/font_color", Color(primary_color));
+	else:
+		stone_count_label.set("custom_colors/font_color", Color.black);
+	
 	
 func set_leaf(value):
 	leaf = value;
 	leaf_count_label.text = str(value);
+	
+	if value >= 10:
+		leaf_count_label.set("custom_colors/font_color", Color(primary_color));
+	else:
+		leaf_count_label.set("custom_colors/font_color", Color.black);
 
 
 func add_wood(value):

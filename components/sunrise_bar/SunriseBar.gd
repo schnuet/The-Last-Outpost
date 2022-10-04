@@ -6,7 +6,7 @@ export var max_value = 100;
 onready var fill = $ColorRect;
 
 var max_width = 0;
-var game_time = 270;
+var game_time = 210;
 
 func _ready():
 	max_width = fill.rect_size.x;

@@ -33,7 +33,7 @@ func spawn_resource():
 				continue;
 			item = stone_item;
 		else:
-			if game.stone >= 10:
+			if game.leaf >= 5:
 				continue;
 			item = leaf_item;
 	
